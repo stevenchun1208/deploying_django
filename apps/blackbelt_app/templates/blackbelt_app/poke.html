@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pokes</title>
+  </head>
+  <body>
+    <h3>Welcome, {{ name }}!</h3>
+    <h3>{{ poked.count }} people poked you!</h3>
+    <a href="{% url 'logout' %}">Logout</a>
+    {% for poke in pokedsort %}
+      <p>{{ poke.user__name }} poked you {{ poke.count }} times. </p>
+    {% endfor %}
+    <h4>People you may want to poke:</h4>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Alias</th>
+        <th>Email Address</th>
+        <th>Poke History</th>
+        <th>Action</th>
+      </tr>
+      {% for user in users%}
+      <tr>
+        {% if user.email != email %}
+        <td>{{ user.name}}</td>
+        <td>{{ user.alias }}</td>
+        <td>{{ user.email }}</td>
+        {% for poke in pokehistory%}
+          {% if poke.friendpoked__id == user.id %}
+          <td>{{ poke.count }} pokes</td>
+          {% endif %}
+        {% endfor %}
+        <td><a href="{%url 'poked' user.id %}"><input type="button" name="" value="Poke!"></a></td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

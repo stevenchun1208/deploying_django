@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login/Registration</title>
+  </head>
+  <body>
+    <h2>Welcome!</h2>
+    <div class="Register">
+      <h3>Register</h3>
+      <form class="" action="{% url 'registration'%}" method="post">
+        {% csrf_token %}
+        <label for="" class ="name"><h5>Name: <input type="text" name="name" value="{{request.POST.name}}" class = "textinput"></h5></label>
+        {% for message in messages %}
+          {% if "fnameerror" in message.tags %} <li class="fnameerror"> {{ message }} </li> {% endif %}
+        {% endfor %}
+        <label for="" class ="alias"><h5>Alias: <input type="text" name="alias" value="{{request.POST.alias}}" class = "textinput"></h5></label>
+        {% for message in messages %}
+          {% if "lnameerror" in message.tags %} <li class="lnameerror"> {{ message }} </li> {% endif %}
+        {% endfor %}
+        <label for="" class ="e_mail"><h5>Email: <input type="text" name="email" value="{{request.POST.email}}" class = "textinput"></h5></label>
+        {% for message in messages %}
+          {% if "emailerror" in message.tags %} <li class="emailerror"> {{ message }} </li> {% endif %}
+        {% endfor %}
+        {% for message in messages %}
+          {% if "usererror" in message.tags %} <li class="usererror"> {{ message }} </li> {% endif %}
+        {% endfor %}
+        <label for="" class ="pword"><h5>Password: <input type="text" name="password" value="{{request.POST.password}}" class = "textinput"></h5></label>
+        {% for message in messages %}
+          {% if "pwerror" in message.tags %} <li class="pwerror"> {{ message }} </li> {% endif %}
+        {% endfor %}
+        <label for="" class ="cpword"><h5>Confirm PW: <input type="text" name="confirmpw" value="{{request.POST.confirmpw}}" class = "textinput"></h5></label>
+        {% for message in messages %}
+          {% if "cfpwerror" in message.tags %} <li class="cfpwerror"> {{ message }} </li> {% endif %}
+        {% endfor %}
+        <label for=""><h5>Date of Birth: <input type="text" name="birthdate" value="" class = "textinput"></h5></label>
+        {% for message in messages %}
+          {% if "bdayerror" in message.tags %} <li class="bdayerror"> {{ message }} </li> {% endif %}
+        {% endfor %}
+        <input type="submit" name="" value="Register">
+      </form>
+    </div>
+    <div class="Login">
+      <h3>Login</h3>
+      <form class="" action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {% for err in error %}
+          {{ err }}
+        {% endfor %}
+
+        <label for="" class ="e_mail"><h5>Email: <input type="text" name="logemail" value="{{request.POST.logemail}}" class = "textinput"></h5></label>
+        <label for="" class ="pword"><h5>Password: <input type="text" name="logpassword" value="" class = "textinput"></h5></label>
+        <input type="submit" name="" value="Login">
+      </form>
+    </div>
+  </body>
+</html>
