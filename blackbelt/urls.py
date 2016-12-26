@@ -18,6 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^main', include('apps.lnr.urls')),
+    url(r'^', include('apps.lnr.urls')),
     url(r'^pokes', include('apps.blackbelt_app.urls')),
 ]
